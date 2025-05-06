@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import HomePage from './pages/HomePage'
 import ProfilePage from './pages/ProfilePage'
@@ -10,27 +10,19 @@ import SignupPage from './auth/SignupPage'
 import LoginPage from './auth/LoginPage'
 
 import { Toaster } from 'react-hot-toast'
-import ProtectedRoute from './components/routes/ProtectedRoute'
 import { useAuthStore } from './store/useAuthStore'
 import { Loader2 } from 'lucide-react'
 
-
 function App() {
-
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
-    const verifyAuth = async () => {
-      await checkAuth();
-    };
-    
-    verifyAuth();
+    checkAuth();
   }, []);
 
-  // Debug output - remove in production
-  console.log("Auth state:", { authUser, isCheckingAuth });
-  
+  console.log({authUser});
 
+  // Show loader only during initial check
   if (isCheckingAuth) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -42,16 +34,14 @@ function App() {
   return (
     <>
       <Routes>
-        <Route element={<ProtectedRoute>
-          <HomeLayout />
-        </ProtectedRoute>}>
+        <Route element={authUser ? <HomeLayout /> : <Navigate to="/login" />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
 
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={!authUser ? <SignupPage /> : <Navigate to="/" />} />
+        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
       </Routes>
 
       <Toaster
