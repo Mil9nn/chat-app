@@ -6,7 +6,11 @@ import { Navigate } from 'react-router-dom';
 const ProtectedRoute = ({children}) => {
     const { authUser, isCheckingAuth } = useAuthStore();
 
-    if(authUser === null) return <div>Loading...</div>
+    if(isCheckingAuth) return (
+      <div className="flex items-center justify-center min-h-screen">
+          <Loader2 className="animate-spin" />
+      </div>
+  );
 
     if(!authUser) return <Navigate to="/login" />
 

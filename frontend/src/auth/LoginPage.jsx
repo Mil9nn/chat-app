@@ -7,14 +7,14 @@ import toast from 'react-hot-toast';
 export default function Login() {
   const navigate = useNavigate();
 
-  const { login, isLoggingIn } = useAuthStore();
+  const { login, isLoggingIn, checkAuth } = useAuthStore();
 
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     // Basic validation
@@ -22,7 +22,9 @@ export default function Login() {
     if (!emailRegex.test(formData.email)) return toast.error('Please enter a valid email address');
     if (formData.password.length < 6) return toast.error('Password must be at least 6 characters long');
 
-    login(formData, navigate);
+    await login(formData);
+    await checkAuth();
+    navigate('/');
   }
 
   return (

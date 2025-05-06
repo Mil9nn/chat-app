@@ -20,10 +20,15 @@ function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
 
   useEffect(() => {
-    checkAuth();
+    const verifyAuth = async () => {
+      await checkAuth();
+    };
+    
+    verifyAuth();
   }, []);
 
-  console.log({authUser});
+  // Debug output - remove in production
+  console.log("Auth state:", { authUser, isCheckingAuth });
   
 
   if (isCheckingAuth) {
