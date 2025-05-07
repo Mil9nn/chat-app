@@ -1,9 +1,11 @@
 import React from 'react'
 import { useChatStore } from '../store/useChatStore'
 import { X } from 'lucide-react';
+import { useAuthStore } from '../store/useAuthStore';
 
 const ChatHeader = () => {
     const { selectedUser, setSelectedUser } = useChatStore();
+    const { onlineUsers } = useAuthStore();
 
     if(selectedUser) {return (
         <div className="flex items-center justify-between px-4 py-3 border-b border-[#00000033]">
@@ -14,7 +16,7 @@ const ChatHeader = () => {
                         alt="User"
                         className="w-full h-full rounded-full object-cover"
                     />
-                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full" />
+                    {onlineUsers.includes(selectedUser._id) && <span className="absolute bottom-[-10px] right-[-50px] text-green-500">online</span>}
                 </div>
                 <span className="font-medium">{selectedUser?.fullName}</span>
             </div>

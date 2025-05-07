@@ -1,5 +1,5 @@
 import React from 'react'
-import { User, Settings, LogOut } from 'lucide-react'
+import { User, Settings, LogOut, MessageSquare } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../store/useAuthStore';
 
@@ -9,14 +9,14 @@ export default function Navbar() {
   const { logout } = useAuthStore();
   
   return (
-    <header className="bg-white shadow-md">
+    <header className="bg-white shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Left side - Logo and text */}
           <Link to="/" className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               {/* Logo placeholder */}
-              <img src="/logo.jpg" className="w-20" />
+              <MessageSquare className="w-8 h-8 text-blue-600" />
               <span className="ml-2 text-xl font-semibold text-gray-900">Chatty</span>
             </div>
           </Link>

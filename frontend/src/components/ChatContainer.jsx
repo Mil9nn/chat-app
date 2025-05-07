@@ -53,7 +53,7 @@ const ChatContainer = () => {
                 {!isSender && (
                   <div className="w-10 h-10 rounded-full overflow-hidden border shrink-0">
                     <img
-                      src={selectedUser.profilePic || "/avatar.png"}
+                      src={selectedUser.profilePic || "/user.svg"}
                       alt="profile pic"
                       className="w-full h-full object-cover"
                     />
@@ -85,7 +85,7 @@ const ChatContainer = () => {
                 {isSender && (
                   <div className="w-10 h-10 rounded-full overflow-hidden border shrink-0">
                     <img
-                      src={authUser.profilePic || "/avatar.png"}
+                      src={authUser.profilePic || "/user.svg"}
                       alt="profile pic"
                       className="w-full h-full object-cover"
                     />

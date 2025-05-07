@@ -7,7 +7,7 @@ const MessageInput = () => {
     const [text, setText] = useState("");
     const [imagePreview, setImagePreview] = useState(null);
     const fileInputRef = useRef(null);
-    const { sendMessage, selectedUser } = useChatStore();
+    const { sendMessage, selectedUser, isSendingMessage } = useChatStore();
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -96,6 +96,7 @@ const MessageInput = () => {
                     className="flex-1 px-4 py-2 border rounded-full text-sm focus:outline-none focus:ring focus:ring-blue-200"
                 />
                 <button
+                    disabled={(!text.trim() && !imagePreview) || isSendingMessage}
                     type="submit"
                     className="bg-blue-500 hover:bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-full text-sm flex items-center gap-1"
                     aria-label="Send message"
