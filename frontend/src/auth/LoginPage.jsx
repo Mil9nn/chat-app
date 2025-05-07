@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Lock, Loader2 } from 'lucide-react';
+import { Mail, Lock, Loader2, Bot } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import toast from 'react-hot-toast';
@@ -33,8 +33,10 @@ export default function Login() {
       <link
         rel="preload"
         as="image"
-        href="https://res.cloudinary.com/dkt1t22qc/image/upload/v1742348949/Prestataires_Documents/smj7n1bdlpjsfsotwpco.png"
+        href="/authBg.jpg"
       />
+
+      
 
       <div
         className="bg-cover bg-gradient-to-br from-[#7337FF] via-black to-[#0C7EA8]"
@@ -45,12 +47,7 @@ export default function Login() {
       >
         <div className="h-screen flex justify-center items-center backdrop-brightness-50">
           <div className="flex flex-col items-center space-y-8">
-            {/* Logo */}
-            <img
-              src="https://res.cloudinary.com/dkt1t22qc/image/upload/v1742348949/Prestataires_Documents/smj7n1bdlpjsfsotwpco.png"
-              alt="TyBot Logo"
-              className="cursor-pointer w-20"
-            />
+            <Bot className="w-12 h-12 text-purple-500" /> 
 
             {/* Login Card */}
             <form onSubmit={handleLoginSubmit} className="rounded-2xl w-80 p-8 bg-[#310D84] shadow-xl shadow-black/50">

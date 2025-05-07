@@ -3,6 +3,7 @@ import { useChatStore } from '../store/useChatStore';
 import SidebarSkeleton from '../skeletons/SidebarSkeleton'
 import { Users } from 'lucide-react';
 import { useAuthStore } from '../store/useAuthStore';
+import NoOnlineUsers from './NoOnlineUsers';
 
 export default function ContactsSidebar() {
   const { users, getUsers, selectedUser, setSelectedUser, isUsersLoading } = useChatStore();
@@ -37,19 +38,20 @@ export default function ContactsSidebar() {
       <header className="flex flex-col justify-center gap-3 border-b border-base-200 w-full p-4">
         <div className="flex items-center gap-2">
           <Users className="w-6 h-6 text-gray-600" />
-          <span className="font-medium hidden lg:block text-gray-800">
+          <span className="font-medium hidden sm:block text-gray-800">
             Contacts
           </span>
         </div>
-        <label className="flex sm:flex-row flex-col items-center gap-2 mb-4 pl-3 text-sm cursor-pointer">
+        <label className="flex sm:flex-row flex-col items-center gap-2 text-sm cursor-pointer">
           <input
             type="checkbox"
             className="accent-blue-500 cursor-pointer"
             checked={showOnlineOnly}
             onChange={(e) => setShowOnlineOnly(e.target.checked)}
           />
-          Show online users only
+          Show online only
         </label>
+        <span className="text-xs text-zinc-500">{onlineUsers.length - 1} online</span>
       </header>
 
       <ul className="h-[72vh] overflow-y-auto">
@@ -67,6 +69,10 @@ export default function ContactsSidebar() {
             <span className="font-medium md:inline hidden">{user.fullName}</span>
           </li>
         ))}
+
+        {filteredUsers.length === 0 && (
+          <NoOnlineUsers />
+        )}
       </ul>
     </aside>
   );

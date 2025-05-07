@@ -20,8 +20,6 @@ function App() {
     checkAuth();
   }, []);
 
-  console.log({authUser});
-
   // Show loader only during initial check
   if (isCheckingAuth) {
     return (
