@@ -19,7 +19,7 @@ const __dirname = path.resolve();
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 app.use(cors({
-  origin: process.env.NODE_ENV === "development" 
+  origin: process.env.NODE_ENV === "development"
     ? "http://localhost:5173"  // Your Vite dev server
     : true,                    // Allow current origin in production
   credentials: true
@@ -29,15 +29,17 @@ app.use('/api/auth', authRoutes);
 app.use("/api/messages", messageRoutes);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  const frontendPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../frontend/dist");
+  app.use(express.static(frontendPath));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  // Update this line in backend/src/index.js
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
 
 app.get('/', (req, res) => {
-    res.send("server is running...");
+  res.send("server is running...");
 })
 
 // Start the server
