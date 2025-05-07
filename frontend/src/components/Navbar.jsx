@@ -16,9 +16,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               {/* Logo placeholder */}
-              <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold">
-                C
-              </div>
+              <img src="/logo.jpg" className="w-20" />
               <span className="ml-2 text-xl font-semibold text-gray-900">Chatty</span>
             </div>
           </Link>
