@@ -5,11 +5,14 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
-const io = new Server(server, {
-  cors: {
-    origin: ["http://localhost:5173"],
-  },
-});
+export const socket = io(
+  import.meta.env.MODE === "development" 
+    ? 'http://localhost:5001' 
+    : '/', 
+  {
+    withCredentials: true
+  }
+);
 
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];
