@@ -57,7 +57,7 @@ const MessageInput = () => {
                             <img
                                 src={imagePreview || '/user.svg'}
                                 alt="Preview"
-                                className="w-20 h-20 object-cover rounded-lg border border-zinc-700"
+                                className="w-20 h-20 object-cover rounded-lg border border-text-base/80"
                             />
                             <button
                                 onClick={removeImage}
@@ -98,7 +98,7 @@ const MessageInput = () => {
                 <button
                     disabled={(!text.trim() && !imagePreview) || isSendingMessage}
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white cursor-pointer px-4 py-2 rounded-full text-sm flex items-center gap-1"
+                    className="bg-primary hover:scale-[1.04] transition-all ease-in-out text-base-100 cursor-pointer px-4 py-2 rounded-full text-sm flex items-center gap-1"
                     aria-label="Send message"
                 >
                     <Send className="w-4 h-4" />

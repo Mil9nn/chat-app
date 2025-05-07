@@ -61,14 +61,14 @@ const ChatContainer = () => {
                 )}
 
                 <div>
-                  <div className="mb-1 text-xs text-gray-500">
+                  <div className="mb-1 text-xs text-base-content/60">
                     <time>{new Date(message.createdAt).toLocaleTimeString()}</time>
                   </div>
 
                   <div
                     className={`rounded-lg p-2 text-sm ${isSender
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-800"
+                      ? "bg-primary text-base-200"
+                      : "bg-base-200 text-base-content"
                       }`}
                   >
                     {message.image && (

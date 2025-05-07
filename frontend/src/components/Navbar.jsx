@@ -9,7 +9,7 @@ export default function Navbar() {
   const { logout } = useAuthStore();
   
   return (
-    <header className="bg-white shadow-sm">
+    <header className="bg-base-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Left side - Logo and text */}
@@ -17,21 +17,21 @@ export default function Navbar() {
             <div className="flex-shrink-0 flex items-center">
               {/* Logo placeholder */}
               <MessageSquare className="w-8 h-8 text-blue-600" />
-              <span className="ml-2 text-xl font-semibold text-gray-900">Chatty</span>
+              <span className="ml-2 text-xl font-semibold text-base-content/95">Chatty</span>
             </div>
           </Link>
           
           {/* Right side - Desktop navigation */}
           <div className="flex items-center space-x-4">
-            <Link to="/profile" className="p-2 rounded-md text-gray-600 hover:bg-gray-100 flex items-center">
+            <Link to="/profile" className="p-2 rounded-md text-base-content/70 hover:bg-base-100 flex items-center">
               <User size={20} />
               <span className="hidden sm:inline ml-1">Profile</span>
             </Link>
-            <Link to="/settings" className="p-2 rounded-md text-gray-600 hover:bg-gray-100 flex items-center">
+            <Link to="/settings" className="p-2 rounded-md text-base-content/70 hover:bg-base-100 flex items-center">
               <Settings size={20} />
               <span className="hidden sm:inline ml-1">Settings</span>
             </Link>
-            <button onClick={() => {logout(navigate)}} className="p-2 rounded-md text-gray-600 hover:bg-gray-100 flex items-center cursor-pointer">
+            <button onClick={() => {logout(navigate)}} className="btn btn-primary">
               <LogOut size={20} />
               <span className="hidden sm:inline ml-1">Logout</span>
             </button>

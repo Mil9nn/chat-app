@@ -20,7 +20,7 @@ const ChatHeader = () => {
                 </div>
                 <span className="font-medium">{selectedUser?.fullName}</span>
             </div>
-            <button onClick={() => {setSelectedUser(null)}} className="text-gray-500 hover:text-red-400 transition cursor-pointer">
+            <button onClick={() => {setSelectedUser(null)}} className="text-base-content/60 hover:text-red-400 transition cursor-pointer">
                 <X className="w-5 h-5" />
             </button>
         </div>
