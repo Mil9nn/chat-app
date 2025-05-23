@@ -8,7 +8,7 @@ const ChatHeader = () => {
     const { onlineUsers } = useAuthStore();
 
     if(selectedUser) {return (
-        <div className="flex items-center justify-between px-4 py-3 border-b border-[#00000033]">
+        <div className="flex items-center justify-between bg-base-300 px-4 py-3">
             <div className="flex items-center gap-2">
                 <div className="relative w-10 h-10">
                     <img
@@ -20,7 +20,7 @@ const ChatHeader = () => {
                 </div>
                 <span className="font-medium">{selectedUser?.fullName}</span>
             </div>
-            <button onClick={() => {setSelectedUser(null)}} className="text-base-content/60 hover:text-red-400 transition cursor-pointer">
+            <button onClick={() => {setSelectedUser(null)}} className="text-base-content/80 bg-base-100 p-1 rounded-sm hover:text-red-400 transition cursor-pointer">
                 <X className="w-5 h-5" />
             </button>
         </div>

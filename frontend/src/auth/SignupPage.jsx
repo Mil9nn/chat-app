@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { Mail, Lock, User, Loader2, Bot } from 'lucide-react';
+import { Mail, Lock, User, Loader2, Bot, Eye, EyeOff } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-
 import { useAuthStore } from '../store/useAuthStore';
-
 
 export default function Signup() {
   const navigate = useNavigate();
-
   const { signup, isSigningUp } = useAuthStore();
 
   const [formData, setFormData] = useState({
@@ -17,98 +14,102 @@ export default function Signup() {
     password: ''
   });
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (formData.fullName.trim().length < 3) return toast.error('Full Name must be at least 3 characters long.');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) return toast.error('Please enter a valid email address');
     if (formData.password.length < 6) return toast.error('Password must be at least 6 characters long');
 
     signup(formData, navigate);
-
-  }
+  };
 
   return (
     <>
-      {/* Preload Logo */}
-      <link
-        rel="preload"
-        as="image"
-        href="https://res.cloudinary.com/dkt1t22qc/image/upload/v1742348949/Prestataires_Documents/smj7n1bdlpjsfsotwpco.png"
-      />
+      <div className="h-screen flex justify-center items-center backdrop-brightness-50">
+        <div className="flex flex-col items-center space-y-6">
 
-      <div
-        className="bg-cover bg-gradient-to-br from-[#7337FF] via-black to-[#0C7EA8]"
-        style={{
-          backgroundImage:
-            'url(/authBg.jpg)',
-        }}
-      >
-        <div className="h-screen flex justify-center items-center backdrop-brightness-50">
-          <div className="flex flex-col items-center space-y-8">
-          <Bot className="w-12 h-12 text-purple-500" /> 
+          <form
+            onSubmit={handleFormSubmit}
+            className="card w-80 bg-base-200 shadow-xl p-8 space-y-4">
 
-            {/* Signup Card */}
-            <form onSubmit={handleFormSubmit} className="rounded-2xl w-80 p-8 bg-[#310D84] shadow-xl shadow-black/50">
-              <h1 className="text-white text-3xl font-bold mb-4">Sign Up</h1>
+            <div className="absolute top-0 right-0 w-16 h-16 bg-base-300 rounded-2xl flex items-center justify-center">
+              <img className="w-12 h-12" src="/logo.png" alt="logo" />
+            </div>
 
-              <div className="space-y-4">
-                {/* Username */}
-                <label className="flex items-center bg-[#8777BA] rounded-md shadow-md shadow-blue-950 px-3">
-                  <User className="text-gray-300" size={18} />
-                  <input
-                    type="text"
-                    placeholder="Username"
-                    onChange={(e) => { setFormData({ ...formData, fullName: e.target.value }) }}
-                    value={formData.fullName}
-                    className="w-full p-2.5 placeholder:text-gray-300 outline-none"
-                  />
-                </label>
+            <h2 className="text-2xl font-bold text-center">Create Account</h2>
 
-                {/* Email */}
-                <div className="flex items-center bg-[#8777BA] rounded-md shadow-md shadow-blue-950 px-3">
-                  <Mail className="text-gray-300" size={18} />
-                  <input
-                    type="text"
-                    placeholder="Email address"
-                    onChange={(e) => { setFormData({ ...formData, email: e.target.value }) }}
-                    value={formData.email}
-                    className="bg-transparent w-full p-2.5 placeholder:text-gray-300 outline-none"
-                  />
-                </div>
+            {/* Full Name */}
+            <label className="input input-bordered flex items-center gap-2">
+              <User className="text-base-content" size={18} />
+              <input
+                type="text"
+                placeholder="Full Name"
+                className="grow"
+                value={formData.fullName}
+                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+              />
+            </label>
 
-                {/* Password */}
-                <div className="flex items-center bg-[#8777BA] rounded-md shadow-md shadow-blue-950 px-3">
-                  <Lock className="text-gray-300" size={18} />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => { setFormData({ ...formData, password: e.target.value }) }}
-                    value={formData.password}
-                    className="bg-transparent w-full p-2.5 placeholder:text-gray-300 outline-none"
-                  />
-                </div>
-              </div>
+            {/* Email */}
+            <label className="input input-bordered flex items-center gap-2">
+              <Mail className="text-base-content" size={18} />
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="grow"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              />
+            </label>
 
-              {/* Sign Up Button */}
-              <button type="submit" className="w-full h-10 mt-6 text-white rounded-md bg-gradient-to-br from-[#7336FF] to-[#3269FF] shadow-md shadow-blue-950">
-                {isSigningUp ? (<div className="flex items-center justify-center">
-                  <Loader2 className="animate-spin" />
-                </div>)
-                  : (<span>Create Account</span>)}
+            {/* Password */}
+            <label className="input input-bordered flex items-center gap-2">
+              <Lock className="text-base-content" size={18} />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Password"
+                className="grow"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex={-1}
+                className="text-base-content"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
+            </label>
 
-              {/* Already have an account */}
-              <Link to="/login" className="text-gray-300 text-center text-sm mt-4">
-                Already have an account?{' '}
-                <span className="text-[#228CE0] cursor-pointer hover:underline">
-                  Sign in
-                </span>
+            {/* Sign Up Button */}
+            <button
+              type="submit"
+              className="btn btn-primary w-full mt-2"
+              disabled={isSigningUp}
+            >
+              {isSigningUp ? (
+                <Loader2 className="animate-spin" size={20} />
+              ) : (
+                'Create Account'
+              )}
+            </button>
+
+            {/* Already have an account */}
+            <p className="text-center text-sm text-base-content">
+              Already have an account?{' '}
+              <Link
+                to="/login"
+                className="text-primary hover:underline"
+              >
+                Sign in
               </Link>
-            </form>
-          </div>
+            </p>
+          </form>
         </div>
       </div>
     </>

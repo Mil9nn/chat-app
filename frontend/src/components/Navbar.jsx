@@ -16,22 +16,22 @@ export default function Navbar() {
           <Link to="/" className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
               {/* Logo placeholder */}
-              <MessageSquare className="w-8 h-8 text-blue-600" />
-              <span className="ml-2 text-xl font-semibold text-base-content/95">Chatty</span>
+              <img className='size-15' src="/logo.png" alt='logo' />
+              <span className="text-xl italic font-semibold text-base-content/95">Chatty</span>
             </div>
           </Link>
           
           {/* Right side - Desktop navigation */}
           <div className="flex items-center space-x-4">
-            <Link to="/profile" className="p-2 rounded-md text-base-content/70 hover:bg-base-100 flex items-center">
+            <Link to="/profile" className="p-2 rounded-md text-base-content hover:bg-base-100 flex items-center">
               <User size={20} />
               <span className="hidden sm:inline ml-1">Profile</span>
             </Link>
-            <Link to="/settings" className="p-2 rounded-md text-base-content/70 hover:bg-base-100 flex items-center">
+            <Link to="/settings" className="p-2 rounded-md text-base-content hover:bg-base-100 flex items-center">
               <Settings size={20} />
               <span className="hidden sm:inline ml-1">Settings</span>
             </Link>
-            <button onClick={() => {logout(navigate)}} className="btn btn-primary">
+            <button onClick={() => {logout(navigate)}} className="btn">
               <LogOut size={20} />
               <span className="hidden sm:inline ml-1">Logout</span>
             </button>

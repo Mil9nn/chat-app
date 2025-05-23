@@ -39,7 +39,7 @@ const ProfilePage = () => {
         />
         <button
           onClick={handleProfilePicClick}
-          className="absolute bottom-1 right-1 bg-black/60 text-white p-1.5 rounded-full hover:bg-black/80">
+          className="absolute bottom-1 right-1 bg-base-300 cursor-pointer text-base-content hover:bg-base-200 hover:text-primary transition-colors p-1.5 rounded-full">
           <Camera className={isUpdatingProfile ? "animate-pulse" : ""} />
         </button>
         <input
@@ -50,44 +50,44 @@ const ProfilePage = () => {
         />
       </div>
 
-      <p className="text-sm text-gray-500 text-center mt-2">
+      {isUpdatingProfile ? <p className="text-sm text-base-content/40 text-center mt-2">We're updating your profile. please wait...</p> : <p className="text-sm text-base-content/40 text-center mt-2">
         Please click the camera icon to upload
-      </p>
+      </p>}
 
       {/* User Info */}
       <div className="mt-8">
-        <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-gray-700">
+        <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-base-content/70">
           Information
         </h3>
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className="font-medium text-gray-600">Name:</span>
-            <span className="text-gray-800">{authUser?.fullName}</span>
+            <span className="font-medium text-base-content/60">Name:</span>
+            <span className="text-base-content/90">{authUser?.fullName}</span>
           </div>
           <div className="flex justify-between">
-            <span className="font-medium text-gray-600">Email:</span>
-            <span className="text-gray-800">{authUser?.email}</span>
+            <span className="font-medium text-base-content/60">Email:</span>
+            <span className="text-base-content/90">{authUser?.email}</span>
           </div>
         </div>
       </div>
 
       {/* Other Info */}
       <div className="mt-8">
-        <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-gray-700">
+        <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-base-content/70">
           Other Information
         </h3>
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className="font-medium text-gray-600">Created At:</span>
-            <span className="text-gray-800">{authUser?.createdAt.split('T')[0]}</span>
+            <span className="font-medium text-base-content/60">Created At:</span>
+            <span className="text-base-content/90">{authUser?.createdAt.split('T')[0]}</span>
           </div>
           <div className="flex justify-between">
-            <span className="font-medium text-gray-600">Account Status:</span>
+            <span className="font-medium text-base-content/60">Account Status:</span>
             <span className="text-green-600 font-semibold">Active</span>
           </div>
           <div className="flex justify-between">
-            <span className="font-medium text-gray-600">User Role:</span>
-            <span className="text-gray-800">Standard</span>
+            <span className="font-medium text-base-content/60">User Role:</span>
+            <span className="text-base-content/90">Standard</span>
           </div>
         </div>
       </div>

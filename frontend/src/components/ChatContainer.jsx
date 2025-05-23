@@ -5,6 +5,7 @@ import ChatHeader from "./ChatHeader";
 import MessageInput from './MessageInput'
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
+import formatTime from "../utils/FormatTime";
 
 const ChatContainer = () => {
   const { messages, getMessages, isMessagesLoading, selectedUser,
@@ -39,7 +40,7 @@ const ChatContainer = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-auto">
+    <div className="flex-1 flex flex-col">
       <ChatHeader />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
@@ -62,15 +63,14 @@ const ChatContainer = () => {
 
                 <div>
                   <div className="mb-1 text-xs text-base-content/60">
-                    <time>{new Date(message.createdAt).toLocaleTimeString()}</time>
+                    <time>{formatTime(new Date(message.createdAt).toLocaleTimeString())}</time>
                   </div>
 
                   <div
                     className={`rounded-lg p-2 text-sm ${isSender
-                      ? "bg-primary text-base-200"
+                      ? "bg-base-300 text-base-content"
                       : "bg-base-200 text-base-content"
-                      }`}
-                  >
+                      }`}>
                     {message.image && (
                       <img
                         src={message.image}
@@ -78,7 +78,8 @@ const ChatContainer = () => {
                         className="rounded-md mb-2 max-w-[200px]"
                       />
                     )}
-                    {message.text && <p>{message.text}</p>}
+                    {message.text && <p className="break-words max-w-[16rem] sm:max-w-[20rem]">{message.text}</p>
+}
                   </div>
                 </div>
 

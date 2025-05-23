@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Send, Image, X, XCircle } from 'lucide-react';
+import { Send, Image, X, XCircle, Loader2 } from 'lucide-react';
 import { useChatStore } from '../store/useChatStore';
 import toast from 'react-hot-toast';
 
@@ -50,9 +50,9 @@ const MessageInput = () => {
 
     if (selectedUser) {
         return (
-            <form onSubmit={handleSendMessage} className="border-t border-[#00000033] p-3 flex items-center gap-2">
+            <form onSubmit={handleSendMessage} className="p-3 flex items-center gap-2">
                 {imagePreview && (
-                    <div className="mb-3 flex items-center gap-2">
+                    <div className="mb-3 absolute z-5 bottom-12 flex items-center gap-2">
                         <div className="relative">
                             <img
                                 src={imagePreview || '/user.svg'}
@@ -61,7 +61,7 @@ const MessageInput = () => {
                             />
                             <button
                                 onClick={removeImage}
-                                className="absolute top-[-5px] right-[-4px] w-5 h-5 z-5 bg-white rounded-full bg-base-300
+                                className="absolute top-[-5px] right-[-4px] w-5 h-5 z-5 hover:text-red-300 rounded-full bg-base-300
                             flex items-center justify-center cursor-pointer"
                                 type="button"
                                 aria-label="Remove image"
@@ -79,14 +79,6 @@ const MessageInput = () => {
                     onChange={handleImageChange}
                     className="hidden"
                 />
-                <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    className="text-gray-500 hover:text-blue-600 transition cursor-pointer"
-                    aria-label="Upload image"
-                >
-                    <Image className="w-5 h-5" />
-                </button>
 
                 <input
                     type="text"
@@ -96,13 +88,21 @@ const MessageInput = () => {
                     className="flex-1 px-4 py-2 border rounded-full text-sm focus:outline-none focus:ring focus:ring-blue-200"
                 />
                 <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="text-base-500 hover:text-blue-600 transition cursor-pointer"
+                    aria-label="Upload image">
+                    <Image className="w-5 h-5" />
+                </button>
+                <button
                     disabled={(!text.trim() && !imagePreview) || isSendingMessage}
                     type="submit"
-                    className="bg-primary hover:scale-[1.04] transition-all ease-in-out text-base-100 cursor-pointer px-4 py-2 rounded-full text-sm flex items-center gap-1"
-                    aria-label="Send message"
-                >
-                    <Send className="w-4 h-4" />
-                    Send
+                    className="bg-primary text-primary-content hover:scale-[1.04] transition-all ease-in-out cursor-pointer px-4 py-2 rounded-full text-sm flex items-center gap-1"
+                    aria-label="Send message">
+                    {isSendingMessage ? <Loader2 className="w-4 h-4 animate-spin" /> :<Send className="w-4 h-4" />}
+                    <span className="text-primary-content font-semibold">
+                        {isSendingMessage ? <span>Sending...</span> : <span>Send</span>}
+                    </span>
                 </button>
             </form>
         );

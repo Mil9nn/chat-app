@@ -7,7 +7,7 @@ import NoChatSelected from '../components/NoChatSelected'
 const HomePage = () => {
   const { selectedUser } = useChatStore();
   return (
-    <div className="flex h-[90vh]">
+    <div className="flex h-[calc(100vh - 65px)]">
       <Sidebar />
       {selectedUser ? <ChatContainer /> : <NoChatSelected />}
     </div>
