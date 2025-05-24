@@ -1,6 +1,6 @@
 # Chatty - Real-Time Chat Application
 
-Chatty is a full-stack MERN (MongoDB, Express, React, Node.js) application that allows users to communicate in real-time. It features user authentication, real-time messaging, image sharing, and a responsive UI.
+Chatty is a MERN (MongoDB, Express, React, Node.js) application that allows users to communicate in real-time. It features user authentication, real-time messaging, image sharing, and a responsive UI.
 
 ## Features
 
@@ -17,21 +17,15 @@ Chatty is a full-stack MERN (MongoDB, Express, React, Node.js) application that 
 
 ### Frontend
 - React
-- React Router
-- Tailwind CSS
 - DaisyUI
 - Zustand (State Management)
 - Socket.io Client
-- Lucide React (Icons)
-- React Hot Toast (Notifications)
 
 ### Backend
 - Node.js
 - Express
 - MongoDB with Mongoose
 - Socket.io
-- JWT Authentication
-- Bcrypt.js (Password Hashing)
+- Authentication
+- REST API
 - Cloudinary (Image Storage)
-- Cors
-- Cookie Parser
